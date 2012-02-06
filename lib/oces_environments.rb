@@ -1,5 +1,9 @@
 class OcesEnvironments
   def self.environments=(environments)
-    # TODO
+    @@environments = environments
+  end
+  
+  def self.environments
+    @@environments
   end
 end

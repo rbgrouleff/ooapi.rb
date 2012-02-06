@@ -1,0 +1,2 @@
+class ServiceProviderError < StandardError
+end
