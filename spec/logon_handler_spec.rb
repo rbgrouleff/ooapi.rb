@@ -16,7 +16,16 @@ describe LogonHandler do
     LogonHandler.validate_and_extract_certificate_and_status(xml_dsig, '1891710781545552145', 'www.nemid.nu')
   end
   
-  pending 'fails for wrong environment'
+  it 'fails for wrong environment' do
+    OcesEnvironments.environments = [:ocesi_danid_env_systemtest]
+    xml_dsig = File.read(File.dirname(__FILE__) + '/resources/xmldsig/openlogon_pocesII.xml')
+    
+    expect do
+      LogonHandler.validate_and_extract_certificate_and_status(xml_dsig, "1891710781545552145", "www.nemid.nu")
+    end.to raise_error(ServiceProviderError)
+  end
+  
+  #pending 'fails for wrong environment'
   pending 'fails for wrong request issuer for POCES-II logon'
   pending 'fails if logon handler gets sign signature'
   pending 'fails with wrong challenge'
